@@ -3,29 +3,46 @@
 
 import athletes from './data/athletes/athletes.js';
 
-import{ eliminarRepetidos, obtenerPaisesUnicosFiltrados, ordenar, /*infoPaises*//*filtroPais*/ } from './data.js'; 
+import{ eliminarRepetidos, obtenerPaisesUnicosFiltrados, ordenar, conteoMedallas, /*filtroPais*/ } from './data.js'; 
 
 // ELEMENTOS PARA RELACIÓN CON EL DOM
 const botonAtras = document.getElementById('atras');
 const contadorPagina = document.querySelector("#contadorPagina");
-const botonSiquiente = document.getElementById('siguiente');
-const btnPagPrimera = document.getElementById('btnPagPrimera');
-const btnPagUltima = document.getElementById('btnPagUltima');
-const paginacion = document.querySelector('.btnPaginacion');
-const menuPaises = document.getElementById('menuPaises');//Menu desplegable
+calculoMedallas
+const botonSiquiente = document.getElementById("siguiente");
+const btnPagPrimera = document.getElementById("btnPagPrimera");
+const btnPagUltima = document.getElementById("btnPagUltima");
+const paginacion = document.querySelector('.paginacion');
+
+const botonAtrasPaises = document.getElementById("atrasPaises");
+const botonSiquientePaises = document.getElementById("siguientePaises");
+const btnPagPrimeraPaises = document.getElementById("btnPagPrimeraPaises");
+const btnPagUltimaPaises = document.getElementById("btnPagUltimaPaises");
+const paginacionPaises = document.querySelector('.paginacionPaises');
+const contadorPaginaPaises = document.querySelector("#contadorPaginaPaises");
+
+const tituloPaises = document.querySelector('.tituloPaises');
+const tituloAtletas = document.querySelector('.tituloAtletas');
+const linkPaises = document.querySelector('.Paises');
+const linkAtletas = document.querySelector('.Atletas');
+const containerPaises = document.querySelector('.seccionPaises');
 const container = document.querySelector('.seccionAtletas');
-const btnAtletas = document.getElementById('btnAtletas');
-const btnPais = document.getElementById('btnPais');
-const containerAtletas = document.querySelector('.navSeccion');
-const containerPaises = document.querySelector('.seccionPaises');//Variable  para la Sección de Países Participantes 
-const todosPaises = document.querySelector('.optTodos');//Variable para agregar al menú despegable la opción para volver a despeglar todos los países.
+const menuPaises = document.getElementById('menuPaises');
+//const menuDesplegable = document.querySelector('.menuDesplegable');
+const todosPaises = document.querySelector('.optTodos');
+
+
+const contenidoTituloAtletas = tituloAtletas.innerHTML;
+const contenidoTituloPaises = tituloPaises.innerHTML;
+const contenidoMenuPaises = menuPaises.innerHTML;
+//const contenidoMenuDesplegable = menuDesplegable.innerHTML;
 
 
 // VARIABLES DE ATLETAS UNICOS Y  ORDENADOS
 const atletasSinRepetidos = eliminarRepetidos(athletes.athletes);
 const atletasOrdenados = ordenar(atletasSinRepetidos);
 
-// VARIABLESS PARA CALCULAR ITEMS POR PAGINA
+// VARIABLES PARA CALCULAR ITEMS POR PAGINA
 const itemsTotales = atletasOrdenados.length;
 const itemsPagina = 100;
 const paginasTotales = Math.ceil(itemsTotales / itemsPagina); // Usamos Math.ceil para redondear hacia arriba
@@ -42,13 +59,64 @@ function obtenerDatos (pagina = 1){
   //return elementos.slice(corteInicio, corteFinal);
 }
 
+// Obtener valores únicos de la propiedad 'team' y agregarlos a la lista desplegable
+// eslint-disable-next-line no-undef
+const paisesUnicosSet = new Set(athletes.athletes.map(athlete => athlete.team));
+const paisesUnicos = Array.from(paisesUnicosSet);
+paisesUnicos.sort(); // Ordenar alfabéticamente
+
+// CREAR EL MENU DESPLEGABLE CON LOS PAISES
+function cargarOpcionesMenu(paisesUnicos, menuPaises) {
+  paisesUnicos.forEach(team => {
+    const option = document.createElement('option');
+    option.value = team;
+    option.textContent = team;
+    menuPaises.appendChild(option);
+  });
+}
+
+// DESPLIEGA NOMBRES DE ATLETAS POR PAIS
+menuPaises.addEventListener('change', function() {
+  const paisSeleccionado = menuPaises.value;
+  if (paisSeleccionado) {
+    const nombresUnicosFiltrados = obtenerPaisesUnicosFiltrados(paisSeleccionado, athletes.athletes);
+    renderizarPaises(nombresUnicosFiltrados, container);  
+  } else if (todosPaises) {
+    renderizar ();
+    primeraPagina(); // Para que regrese a la primera página
+    paginaActual = 1;
+    // Agrega todos los elementos de paginación nuevamente
+    paginacion.appendChild(btnPagPrimera);
+    paginacion.appendChild(botonAtras);
+    paginacion.appendChild(contadorPagina);
+    paginacion.appendChild(botonSiquiente);
+    paginacion.appendChild(btnPagUltima);
+  } else {
+    container.innerHTML = '';
+    alert("Seleccione un país para filtrar");
+  }
+});
+
 // FUNCION QUE LLENA EL NUEVO DOM A PARTIR DE LAS VARIABLLES
 function renderizar(){
   const cargaDatos = obtenerDatos(paginaActual);
   contadorPagina.textContent = `${paginaActual} / ${paginasTotales}`;
 
-  container.innerHTML = ""; // Limpiar el contenido previo
+  container.innerHTML = ''; // Limpiar el contenido previo
   containerPaises.innerHTML = ''; // Eliminar sección paises
+  paginacionPaises.innerHTML = ''; // Eliminar paginación paises
+  paginacion.innerHTML = ''; // Devolver paginación a cero
+  tituloPaises.innerHTML = ''; // Eliminar título paises
+  tituloAtletas.innerHTML = contenidoTituloAtletas; // Cargar título atletas
+  menuPaises.innerHTML = contenidoMenuPaises; // Cargar menú desplegable
+  //menuDesplegable.innerHTML = contenidoMenuDesplegable;
+  cargarOpcionesMenu(paisesUnicos, menuPaises);
+  
+  paginacion.appendChild(btnPagPrimera);
+  paginacion.appendChild(botonAtras);
+  paginacion.appendChild(contadorPagina);
+  paginacion.appendChild(botonSiquiente);
+  paginacion.appendChild(btnPagUltima);
 
   cargaDatos.forEach(function (datosSeccion){
     const atletas = document.createElement("div");
@@ -152,11 +220,16 @@ menuPaises.addEventListener('change', function() {
   }
 });
 
+calculoMedallas
 // RENDERIZAR LOS ATLETAS SEGÚN EL PAÍS SELECCIONADO
 function renderizarPaises (nombresUnicos, container){
   container.innerHTML = '';
   paginacion.innerHTML = ''; // Elimina los botones de paginación una vez filtrados los atletas por país
 
+  menuPaises.innerHTML = contenidoMenuPaises; // Cargar menú desplegable
+  //menuDesplegable.innerHTML = contenidoMenuDesplegable;
+  cargarOpcionesMenu(paisesUnicos, menuPaises);
+  
   nombresUnicos.forEach(nombre => {
     const nombreInfo = document.createElement("div");
     nombreInfo.classList.add("cardAtleta");
@@ -223,41 +296,157 @@ function cambioPais( ){
   });
 }
 
+calculoMedallas
+// LLENAR EL NUEVO DOM A PARTIR DE PAISES //
+
 btnNavPais.addEventListener('click',cambioPais);
+
+
+// VARIABLES PARA CALCULAR ITEMS POR PAGINA
+const paisesUnicosOrdenados = paisesUnicos.sort();
+const itemsTotalesPaises = paisesUnicosOrdenados.length;
+const itemsPaginaPaises = 20;
+const paginasTotalesPaises = Math.ceil(itemsTotalesPaises / itemsPaginaPaises); // Usamos Math.ceil para redondear hacia arriba
+let paginaActualPaises = 1;
+
+// FUNCION PARA OBTENER ITEMS POR PAGINA
+function obtenerDatosPaises (pagina = 1){
+  paginaActualPaises = pagina; // Actualizamos la página actual
+  const corteInicio = (pagina - 1) * itemsPaginaPaises;
+  const corteFinal = corteInicio + itemsPaginaPaises;
+  const items = paisesUnicosOrdenados.slice(corteInicio, corteFinal);
+  return items;
+}
+
+// BOTONES PRIMERA Y ULTIMA PÁGINA
+function primeraPaginaPaises() {
+  if (paginaActualPaises !== 1){
+    paginaActualPaises = 1; // Llamar a renderizar con la página 1
+    renderizarCardsPaises();
+  } 
+}
+
+function ultimaPaginaPaises() {
+  if (paginaActualPaises !== paginasTotalesPaises){
+    paginaActualPaises = paginasTotalesPaises;// Llamar a renderizar con la última página
+    renderizarCardsPaises();
+  } 
+}
+
+// Función para retroceder de pagina
+function retrocederPaginaPaises() {
+  paginaActualPaises = paginaActualPaises - 1;
+  renderizarCardsPaises();
+}
+
+// Funcion para avanzar de pagina
+function avanzarPaginaPaises(){
+  paginaActualPaises = paginaActualPaises + 1;
+  renderizarCardsPaises();
+}
+
+// Función que habilita o desactiva los botones de la paginas dependiendo de si nos encontramos en la primera página o en la última.
+function gestionBotonesPaises(){
+  //Esto comprueba si no se puede retroceder
+  if (paginaActualPaises === 1 ) {
+    botonAtrasPaises.setAttribute("disabled", true);
+  }
+  else{
+    botonAtrasPaises.removeAttribute("disabled");
+  }
+  //Esto comprueba si no se puede avanzar
+  if (paginaActualPaises === paginasTotalesPaises ) {
+    botonSiquientePaises.setAttribute("disabled", true);
+  }
+  else{
+    botonSiquientePaises.removeAttribute("disabled");
+  }
+}
+
+// FUNCION PARA RENDERIZAR LAS CARDS DE PAISES CON NOMBRE Y MEDALLAS
+function renderizarCardsPaises(){
+
+  containerPaises.innerHTML = ''; // Limpiar el contenido previo
+  container.innerHTML = ''; // Eliminar sección atletas
+  paginacion.innerHTML = ''; // Eliminar paginación atletas
+  tituloAtletas.innerHTML = ''; // Eliminar título atletas
+  menuPaises.innerHTML = ''; // Eliminar filtro por paises
+  tituloPaises.innerHTML = contenidoTituloPaises; // Mostrar título
+  //menuDesplegable.innerHTML = '';
+
+  paginacionPaises.appendChild(btnPagPrimeraPaises);
+  paginacionPaises.appendChild(botonAtrasPaises);
+  paginacionPaises.appendChild(contadorPaginaPaises);
+  paginacionPaises.appendChild(botonSiquientePaises);
+  paginacionPaises.appendChild(btnPagUltimaPaises);
+
+  const cargaDatosPaises = obtenerDatosPaises(paginaActualPaises);
+  contadorPaginaPaises.textContent = `${paginaActualPaises} / ${paginasTotalesPaises}`;
+
+  // Cargar los nombres de paises en  cards
+  cargaDatosPaises.forEach(pais => {
+    const cardPais = document.createElement("div");
+    cardPais.classList.add("cardPais");
+    const nombrePais = document.createElement("p");
+    nombrePais.textContent = pais;
+    cardPais.appendChild(nombrePais);
+
+    // Obtener las medallas por país del objeto medallasPorPais
+    const medallasPais = medallasPorPais[pais];
+    if (medallasPais) {
+      const medallasInfo = document.createElement("div");
+      medallasInfo.textContent = `
+        ORO: ${medallasPais.Gold}
+        PLATA: ${medallasPais.Silver}
+        BRONCE: ${medallasPais.Bronze}`;
+      medallasInfo.classList.add("medallas");
+      cardPais.appendChild(medallasInfo);
+    }
+    containerPaises.appendChild(cardPais);
+  });
+  gestionBotonesPaises(); // Llamar a gestionBotones para actualizar los botones
+}
+
+// Contar las medallas por equipo
+const medallasPorPais = conteoMedallas(athletes.athletes);
+console.log(medallasPorPais);
+
+// Llama a los botones para avanzar o retroceder
+botonAtrasPaises.addEventListener("click", retrocederPaginaPaises);
+botonSiquientePaises.addEventListener('click', avanzarPaginaPaises);
+btnPagPrimeraPaises.addEventListener('click', primeraPaginaPaises);
+btnPagUltimaPaises.addEventListener('click', ultimaPaginaPaises);
+
+// Acciones cuando se da click en el menú de la barra de navegación
+linkPaises.addEventListener("click", renderizarCardsPaises);
+linkAtletas.addEventListener("click", renderizar);
+
+
+
+
+// INTENTOS DE CARGAR CONTEO DE MEDALLAS
+/*
+function renderizarCardsPaises(){
+  const cargaDatosPaises = obtenerDatosPaises(paginaActualPaises);
+  contadorPaginaPaises.textContent = `${paginaActualPaises} / ${paginasTotalesPaises}`;
+
+  for (let i = 0; i < cargaDatosPaises.length; i++) {
+    const cardPais = document.createElement("div");
+    cardPais.classList.add("cardPais");
+    const card = document.createElement("p");
+    card.textContent = cargaDatosPaises[i];
+    cardPais.appendChild(card);
+    containerPaises.appendChild(cardPais);
+  }
+  gestionBotonesPaises(); // Llamar a gestionBotones para actualizar los botones
+}*/
+
 
 // FUNCIÓN AGNÓSTICA
 // const atletasUnicosOrdenados = eliminarDuplicadosYOrdenar('name', 'name');
 // const paisesFiltrados = filtroPais(paisSeleccionado, athletes.athletes);
 // const atletasUnicosOrdenadosPorPais = eliminarDuplicadosYOrdenar(paisesFiltrados, 'name', 'name');
 
-
-/*
-// OBTENER DATOS DE PAISES
-function eliminarPaisesRepetidos(athletes) {
-  const paises = (athletes.team);
-  const paisesUnicos = [];
-  const paisesVistos = [];
-  paises.forEach(athlete => {
-    if (paisesVistos.includes(athlete.team)) {
-      // No hacer nada si el nombre ya está en paisesVistos
-    } else {
-      paisesVistos.push(athlete.team);
-      paisesUnicos.push(athletes);
-    }
-  });
-  console.log(paisesUnicos);
-  return paisesUnicos;
-}
-eliminarPaisesRepetidos();
-
-const paisesSinRepetidos = eliminarPaisesRepetidos(athletes.athletes.team);
-
-// FUNCION PARA ORDENAR DE LA A A LA Z 
-function ordenarPaises (athletes) {
-  return athletes.team.sort ((a,b) => a.team.localeCompare(b.team));
-}
-const paisesOrdenados = ordenarPaises (paisesSinRepetidos);
-*/
 
 /*
 // PRUEBAS FILTRO POR PAIS
@@ -337,64 +526,3 @@ const nombres=[
 ]
 root.innerHTML= renderHtml(nombres)
 root.innerHTML= '<marquee>Soy una serpiente que anda por el bosque</marquee>'*/
-
-
-// CÓDIGO DE CARO PULIDO PARA PAGINACIÓN //
-// const items = 20;
-// let totalPages;
-
-// const navBarToggle = document.querySelector('.toggle');
-// const navBarButtons = document.querySelector('.links');
-
-// const pageSelector = document.querySelector('#page-selector');
-// const backBut = document.querySelector('#back-button');
-// const forwardBut = document.querySelector('#forward-button');
-
-// function init() {
-//   totalPages = Math.ceil(globalData.length/items);
-//   document.querySelector('nav section h3').innerHTML = "Flags of Countries";
-//   inputSearch.value = '';
-//   switchBut.checked = false;
-//   backBut.disabled = true;
-//   createPaginator(totalPages, pageSelector);
-//   createSelectorForFilterBy();
-//   theData = globalData;
-//   showCards(theData, cards, parseInt(pageSelector.value) + 1, items);
-//   showTable(theData, table, parseInt(pageSelector.value) + 1, items);
-//   (switchBut.checked === true) ? cards.style.display = 'none' : table.style.display = 'none';
-//   createEventListeners();
-// }
-
-// forwardBut.addEventListener('click', (event) => {
-//   moveBetweenPages(event);
-// }); 
-// backBut.addEventListener('click', (event) => {
-//   moveBetweenPages(event);
-// });
-
-// function moveBetweenPages(event){
-//   const actual = parseInt(pageSelector.value);
-//   if(event.target.id.endsWith("button")){
-//     (actual === 1) ? backBut.disabled = true : backBut.disabled = false;
-//     (actual === Math.ceil(theData.length/items) - 2) ? forwardBut.disabled = true : forwardBut.disabled = false;
-//   } else if (event.target.id.endsWith("selector")){
-//     (actual === 0) ? backBut.disabled = true : backBut.disabled = false;
-//     (actual === Math.ceil(theData.length/items) - 1) ? forwardBut.disabled = true : forwardBut.disabled = false;
-//   }
-//   if ( actual >= 0 && actual < Math.ceil(theData.length/items) ){
-//     if(event.target.id === "back-button"){
-//       forwardBut.disabled = false;
-//       pageSelector.text = parseInt(actual);
-//       pageSelector.value = parseInt(actual)-1;
-//     } else if(event.target.id === "forward-button"){
-//       backBut.disabled = false;
-//       pageSelector.text = parseInt(actual)+2;
-//       pageSelector.value = parseInt(actual)+1;
-//     }
-//   }
-//   if (switchBut.checked){
-//     showTable(theData, table, parseInt(pageSelector.value) + 1, items);
-//   } else{
-//     showCards(theData, cards, parseInt(pageSelector.value) + 1, items);
-//   }
-// }

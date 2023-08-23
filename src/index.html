@@ -16,9 +16,9 @@
       <div class="navbar">
         <div class="menu">
           <img src="./imgs/logos/logo_aros.png" alt="Aros olimpicos">
-          <a id="btnPais" class="menuPaises" href="#">Países</a>
-          <a id="btnAtletas" class="menuAtletas" href="#">Atletas</a>
-          <a class="menuEquidad" href="#">Equidad de Género</a> 
+          <a class="Atletas" href="#">Atletas</a>
+          <a class="Paises" href="#">Países</a>
+          <a class="Equidad" href="#">Equidad de Género</a> 
           <img src="./imgs/logos/logo_horizontal.png" alt="Logo Rio 2016">
         </div>
       </div>
@@ -30,26 +30,44 @@
     </div> -->
 
     <!--Cards de países-->
+    <section class="navSeccion">
+      <!--Título-->
+      <h2 class="tituloPaises">Paises participantes</h2>
+      <!--Paginacion-->
+      <div class="paginacionPaises">
+        <button id="btnPagPrimeraPaises" class="btn">P.1</button>
+        <button id="atrasPaises" class="btnFlecha"> << </button> <!--Boton para retroceder pagina-->
+        <span id="contadorPaginaPaises"></span> <!--Informacion de la pagina actual-->
+        <button id="siguientePaises" class="btnFlecha"> >> </button> <!--Boton para avanzar de pagina-->
+        <button id="btnPagUltimaPaises" class="btn">P.5</button>
+      </div>
+      <!--Buscador-->
+      <!-- <input id="buscador" class="inputBuscar" type="text" placeholder="Buscar"> -->
+    </section>
+
     <section class="seccionPaises">
-      <h2>Paises participantes</h2>
+      <!-- <div class="cardPais"></div> -->
       <div class="cardPais">
-        <div class="nombrePais">
-          <p></p>
-        </div>
-        <!--<div class="medallas">
-          <span class="medallaOro">Oro</span>
-          <span class="medallaPlata">Plata</span>
-          <span class="medallaBronce">Bronce</span>
-        </div>-->
+ calculoMedallas
+        <!-- <div class="nombrePais"> -->
+        <p></p>
+        <!-- ${atletasPagina[i].name} -->
+      </div>
+      <div class="medallas">
+        <span class="medallaOro">Oro</span>
+        <span class="medallaPlata">Plata</span>
+        <span class="medallaBronce">Bronce</span>
+
+
       </div>
     </section>
 
     <!--Cards de atletas-->
     <section class="navSeccion">
       <!--Título-->
-      <h2>Atletas participantes</h2>
+      <h2 class="tituloAtletas">Atletas participantes</h2>
       <!--Paginacion-->
-      <div class="btnPaginacion">
+      <div class="paginacion">
         <button id="btnPagPrimera" class="btn">P.1</button>
         <button id="atras" class="btnFlecha"> << </button> <!--Boton para retroceder pagina-->
         <span id="contadorPagina"></span> <!--Informacion de la pagina actual-->
