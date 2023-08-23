@@ -79,19 +79,12 @@ main{
     color: white;
     justify-content: space-around;
     align-items: center;
-    padding-top: 0px;
+    
 }
 
-.paginacion{
+.btnPaginacion{
     display: flex;
     justify-content: space-between;
-    gap: 30px;
-}
-
-.paginacionPaises{
-    display: flex;
-    justify-content: center;
-    align-items: center;
     gap: 30px;
 }
 
@@ -207,44 +200,38 @@ main{
 }
 
 .seccionPaises{
-    max-width: 90%;
-    margin: 20px auto 0; 
-    padding: 0 20px 20px; /* top | left and right | bottom *//* Añadir un espaciado adicional en los lados para centrar */
-
     font-family: 'Itim', sans-serif;
     font-size: x-large;
     font-weight: 700;
-    color: #044A88;
-
-    /* display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-    grid-gap: 20px; Espacio entre las columnas y filas */
-    
+    padding: 20px;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
-    justify-items: center;
-    align-items: center;
-    gap: 20px;
+    color: white;
 }
 
 .cardPais{
     margin-top: 50px;
     background-color: white;
     border-radius: 60px;
-    width: 200px;
-    height: 100px;
-
+    width: 350px;
+    height: 120px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 20px;
-
     font-family: 'Roboto', sans-serif;
     font-size: medium;
     font-weight: 400;
     color: #044A88;
+}
+
+.cardPais img{
+    width: 85px;
+    height: 40px;
+    margin-right: 20px;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 .nombrePais{
@@ -254,11 +241,11 @@ main{
     font-weight: 700;
 }
 
+
 .medallas{
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Quattrocento Sans', sans-serif;/*tipografía para texto de medallas*/
     position: relative;
-    padding: 0 30px 0; /* top | left and right | bottom */
-    text-align: center;
+    margin-left: 20px;
 }
 
 .medallaPlata{
