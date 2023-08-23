@@ -15,7 +15,7 @@ export function eliminarRepetidos(athletes) {
   return atletasUnicos;
 }
 
-// FUNCION PARA ORDENAR ALFABETICAMENTE
+// FUNCION PARA ORDENAR AFABETICAMENTE
 export function ordenar (athletes) {
   return athletes.sort((a,b) => a.name.localeCompare(b.name));
 }
@@ -25,7 +25,7 @@ debe estar antes que el segundo, cero si ambos elementos son equivalentes
 y un valor positivo si el primer elemento debe estar después que el segundo.*/
 
 // FUNCION FILTRO POR PAIS
-export function filtroPais(input, athletes) {
+export function filtroPais (input, athletes) {
   return athletes.filter(item => item.team === input);
 }
 
@@ -37,13 +37,114 @@ export function obtenerPaisesUnicosFiltrados (paisSeleccionado, athletes){
   return paisesUnicosOrdenados;
 }
 
-//Función para sacar el nombre de los paises
-/*export function infoPaises(athletes) {
-  // Obtener los nombres únicos de los países de la lista de atletas
-  // eslint-disable-next-line no-undef
-  const paisesUnicos = [...new Set(athletes.map(athlete => athlete.team))].sort();
-  return paisesUnicos;
+// FUNCION PARA CONTAR MEDALLAS POR PAIS
+export function conteoMedallas (athletes) {
+  const medallasPorPais = {};
+  athletes.forEach(athlete => {
+    const pais = athlete.team;
+    const medalla = athlete.medal;
+    if (!medallasPorPais[pais]) {
+      medallasPorPais[pais] = { Gold: 0, Silver: 0, Bronze: 0 };
+    }
+    if (medalla === "Bronze") {
+      medallasPorPais[pais].Bronze++;
+    } else if (medalla === "Silver") {
+      medallasPorPais[pais].Silver++;
+    } else if (medalla === "Gold") {
+      medallasPorPais[pais].Gold++;
+    }
+  });
+  return medallasPorPais;
+}
+
+
+// FUNCION CONTEO MEDALLAS //  BRENDA
+/*
+export function conteoMedallas(athletes) {
+
+  const gold = [];
+  const silver = [];
+  const bronze = [];
+
+  athletes.forEach (athlete => {
+    const pais = athlete.team;
+    const medalla = athlete.medal;
+    if (medalla === "Gold") {
+      gold.push(athlete[pais]);
+    } else if (medalla === "Silver") {
+      silver.push(athlete[pais]);
+    } else if (medalla === "Bronze") {
+      bronze.push(athlete[pais]);
+    }
+  });
+  const result = `Gold: ${gold.length} Silver: ${silver.length} Bronze: ${bronze.length}`;
+  return result;
+}
+*/
+
+// FUNCION CONTEO MEDALLAS // JAZZ
+/*
+export function conteoMedallas(athletes){
+  let medallaBronce = 0;
+  let medallaPlata = 0;
+  let medallaOro = 0;
+
+  for (let i = 0; i < athletes.length; i++){
+    if (athletes[i].medal === 'Bronze') {
+      medallaBronce++;
+    }
+    else if (athletes[i].medal === 'Silver') {
+      medallaPlata++;
+    }
+    else if(athletes[i].medal === 'Gold'){
+      medallaOro++;
+    }
+  }
+  return {
+    Bronce: medallaBronce,
+    Plata: medallaPlata,
+    Oro: medallaOro 
+  };
 }*/
+
+// FUNCION CONTEO MEDALLAS // CHATGPT
+/*
+export function conteoMedallas(athletes){
+  const medallasPorPais = {}; // Donde las va a guardar
+
+  let medallaBronce = 0;
+  let medallaPlata = 0;
+  let medallaOro = 0;
+
+  for (let i = 0; i < athletes.length; i++){
+    if (athletes[i].medal === 'Bronze') {
+      medallaBronce++;
+    }
+    else if (athletes[i].medal === 'Silver') {
+      medallaPlata++;
+    }
+    else if(athletes[i].medal === 'Gold'){
+      medallaOro++;
+    }
+
+    const pais = atletas[i].team;
+
+    if (!medallasPorPais[pais]) {
+      medallasPorPais[pais] = {
+        Bronze: 0,
+        Silver: 0,
+        Gold: 0,
+      };
+    }
+    medallasPorPais[pais].Bronze = medallaBronce;
+    medallasPorPais[pais].Silver = medallaPlata;
+    medallasPorPais[pais].Gold = medallaOro;
+}
+return medallasPorPais;
+}
+*/
+
+
 /*
 // FUNCION FILTRO POR PAIS
 // Filtrar y ordenar los nombres eliminando repetidos
