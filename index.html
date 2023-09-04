@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Data Lovers</title>
+    <link rel="stylesheet" href="style.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Itim&family=Quattrocento+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Itim&family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
+    <!-- <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> -->
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script src="main.js" type="module"></script> 
+  </head>
+  <body>
+    <div id="root"></div>
+    <header>
+      <!--Menú-->
+      <div class="navbar">
+        <input type="checkbox" name="" id="toggle">
+        <label for="toggle"><i class="material-icons">menu</i></label>
+        <div class="menu">
+          <img src="./imgs/logos/logo_aros.png" alt="Aros olimpicos">
+          <a class="Atletas" href="#">Atletas</a>
+          <a class="Paises" href="#">Países</a>
+          <a class="Equidad" href="#">Equidad de Género</a> 
+          <img class="rio" src="./imgs/logos/logo_horizontal.png" alt="Logo Rio 2016">
+        </div>
+      </div>
+    </header>
+    <main>
+    <!--Página de acceso-->
+    <!-- <div class="container">
+      <button class="button" href="#">Entrar</button>
+    </div> -->
+
+    <!--Sección Navegación-->
+    <section class="navSeccion">
+
+      <!--Título Atletas-->
+      <h2 class="tituloAtletas">Atletas participantes</h2>
+      <!--Título Paises-->
+      <h2 class="tituloPaises">Paises participantes</h2>
+      <!--Título Equidad-->
+      <h2 class="tituloEquidad">Equidad de género</h2>
+      <p class="textoEquidad">¿Cuántas mujeres acudieron a representar a cada país?</p>
+
+      <!--Paginacion Atletas-->
+      <div class="paginacionAtletas">
+        <button id="btnPagPrimera" class="btn">P.1</button>
+        <button id="atras" class="btnFlecha"> &lt&lt </button> <!--Boton para retroceder pagina-->
+        <span id="contadorPagina"></span> <!--Informacion de la pagina actual-->
+        <button id="siguiente" class="btnFlecha"> &gt&gt </button> <!--Boton para avanzar de pagina-->
+        <button id="btnPagUltima" class="btn">P.19</button>
+      </div>
+
+      <!--Paginacion Paises-->
+      <div class="paginacionPaises">
+        <button id="btnPagPrimeraPaises" class="btn">P.1</button>
+        <button id="atrasPaises" class="btnFlecha"> &lt&lt
+        </button> <!--Boton para retroceder pagina-->
+        <span id="contadorPaginaPaises"></span> <!--Informacion de la pagina actual-->
+        <button id="siguientePaises" class="btnFlecha"> &gt&gt
+        </button> <!--Boton para avanzar de pagina-->
+        <button id="btnPagUltimaPaises" class="btn">P.5</button>
+      </div>
+
+      <!--Menu deplegable-->
+      <!-- <div class="menuDesplegable"> -->
+        <select id="menuPaises">
+          <option value="">Selecciona un pais</option>
+          <option value="" class="optTodos">Todos los paises</option>
+        </select>
+      <!-- </div> -->
+
+      <!--Buscador-->
+      <!-- <input id="buscador" class="inputBuscar" type="text" placeholder="Buscar"> -->
+    </section>
+
+    <!--Sección Paises-->
+    <section class="seccionPaises">
+      <!-- <div class="cardPais"></div> -->
+      <div class="cardPais">
+        <!-- <div class="nombrePais"> -->
+        <p></p>
+        <!-- ${atletasPagina[i].name} -->
+      </div>
+      <!-- <div class="medallas">
+        <span class="medallaOro">Oro</span>
+        <span class="medallaPlata">Plata</span>
+        <span class="medallaBronce">Bronce</span>
+      </div> -->
+    </section>
+    
+    <!--Sección Atletas-->
+    <section class="seccionAtletas">
+      <!-- <div class="cardAtleta"></div> -->
+      <div class="cardAtleta">
+        <p></p>
+        <!-- ${atletasPagina[i].name} -->
+      </div>
+    </section>
+      
+    <!--Sección de Equidad de genero-->
+    <section class="seccionEquidad">
+      <div class="cardEquidad">
+        <p></p>
+      </div>
+
+      <div id="grafica" class="grafica"></div>
+    </section>
+
+    </main>
+    <footer>
+      <p>Creado por Jazmin Ruíz Orbe y Brenda Hernández Novoa</p>
+    </footer>
+    <dialog id="modal" class="modal">
+      <button id="btnCerrarDatos">X</button>
+        <ul class="datosAtleta"></ul>
+    </dialog>
+  </body>
+</html>

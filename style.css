@@ -1,0 +1,577 @@
+* {
+    margin: 0;
+    padding: 0;
+    }
+
+main{
+    background-image: url('./imgs/fondos/Fondos\ propuestas_Propuesta\ 2\ -\ 01.jpg');
+    width: 100%;
+    height: fit-content;
+    min-height: 85vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.navbar{
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    background-color: #2B993e;  
+    height: 10vh;
+    padding: 0 20px;
+}
+
+.menu{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    padding: 0 20px;
+}
+
+.menu a {
+    font-family: 'Itim', sans-serif;
+    font-size: 3vh; /*3vh o 2.3rem*/
+    font-weight: 700;
+    color: white; 
+    text-decoration: none;    
+    margin: auto; 
+}
+
+.menu img{
+    height: 3.8rem;
+    padding: 1rem;
+}
+
+.menu a:hover{
+    color: #044A88;
+}
+
+.menu a:active{
+    color: #F2511C;
+}
+
+.navSeccion{
+    max-width: 90%;
+    margin: auto;
+    padding: 2rem; /* top | left and right | bottom *//* Añadir un espaciado adicional en los lados para centrar */
+
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, auto));
+    grid-gap: 0.5rem; /* Espacio entre las columnas y filas */
+    
+    justify-items: left; 
+    align-items: center;
+
+    font-family: 'Itim', sans-serif;
+    font-size: x-large;
+    font-weight: 700;
+    color: white;
+}
+
+.paginacionAtletas{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.paginacionPaises{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    gap: 1.2rem;
+}
+
+#contadorPagina{
+    font-family: 'Itim', sans-serif;
+    font-size: x-large;
+    font-weight: 700;
+    color: white;
+    width: 5rem;
+    text-align: center;
+}
+
+.btn{
+    width: 4rem;
+    height: 2rem;
+    border-radius: 1rem;
+    background-color: white;
+    font-family: 'Roboto', sans-serif;
+    font-size: medium;
+    font-weight: 400;
+    color: #044A88;
+    text-align: center;
+}
+
+.btn:hover{
+    background-color: #044A88;
+    color: white;
+    border-color: white;
+}
+
+.btnFlecha{
+    width: 2rem;
+    height: 2rem;
+    border-radius: 0.4rem;
+    background-color: white;
+    font-family: 'Roboto', sans-serif;
+    font-size: medium;
+    font-weight: 400;
+    color: #044A88;
+    text-align: center;
+}
+
+.btnFlecha:hover{
+    background-color: #044A88;
+    color: white;
+    border-color: white;
+}
+
+#menuPaises{  
+    height: 2rem;
+    border-radius: 0.4rem;
+    background-color: white;
+    font-family: 'Roboto', sans-serif;
+    font-size: medium;
+    font-weight: 400;
+    color: #044A88;
+    justify-self: right;
+}
+
+#menuPaises:hover{
+    background-color: #044A88;
+    color: white;
+    border-color: white;
+}
+
+.textoEquidad{
+    justify-self: right;
+}
+
+.seccionAtletas{
+    max-width: 90%;
+    margin: 1rem auto 0; 
+    padding: 0 2rem 2rem; /* top | left and right | bottom *//* Añadir un espaciado adicional en los lados para centrar */
+
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+    grid-gap: 1rem; /* Espacio entre las columnas y filas */
+    
+    justify-content: space-evenly;
+    justify-items: center;
+    align-items: flex-start;
+}
+
+.cardAtleta{
+    background-color: white;
+    width: 10rem;
+    height: 3.6rem;
+    border-radius: 0.8rem;
+
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+
+    font-family: 'Roboto', sans-serif;
+    font-size: medium;
+    font-weight: 400;
+    color: #044A88;
+}
+
+.cardAtleta:hover{
+    cursor: pointer;
+    background-color: #FCBE0E;
+}
+
+dialog{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+
+.modal{
+    display: flex;
+    flex-direction: column;
+    justify-content: top;
+    align-content: center;
+    background-color: white;
+    height: 30rem;
+    width: 20rem;
+    gap: 20px;
+    color: #044A88;
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+    font-size: x-large;
+    font-weight: 400;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: -1rem 1rem 1rem 1rem #044A88; /* offset-x | offset-y | blur-radius | spread-radius | color */
+}
+
+.modal button{
+    height: 3rem;
+    width: 3rem;
+    font-weight: 700;
+    font-size: x-large;
+    color: white;
+    background-color: #044A88;
+    margin-bottom: 1rem;
+    margin-left: 17rem;
+    cursor: pointer;
+}
+
+.modal button:hover{
+    background-color: #F2511C;
+    color: white;
+}
+
+.seccionPaises{
+    max-width: 90%;
+    margin: 1rem auto 0; 
+    padding: 0 2rem 2rem; /* top | left and right | bottom *//* Añadir un espaciado adicional en los lados para centrar */
+
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+    grid-gap: 1rem; /* Espacio entre las columnas y filas */
+    
+    justify-content: space-evenly;
+    justify-items: center;
+    align-items: flex-start;
+    
+    /*display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    justify-items: center;
+    align-items: center;
+    gap: 20px;*/
+}
+
+.cardPais{
+    /*margin-top: 50px;*/
+    background-color: white;
+    border-radius: 6rem;
+    width: 16rem;
+    height: 3.6rem;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /*gap: 20px;*/
+    padding: 5px;
+
+    font-family: 'Roboto', sans-serif;
+    font-size: medium;
+    font-weight: 400;
+    color: #044A88;
+}
+
+.seccionEquidad{
+    max-width: 90%;
+    margin: 1rem auto 0; 
+    padding: 0 2rem 2rem; /* top | left and right | bottom */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+    grid-gap: 1rem; 
+    justify-content: space-evenly;
+    justify-items: center;
+    align-items: flex-start;
+}
+
+.cardEquidad{
+    background-color: white;
+    width: 10rem;
+    height: 3.6rem;
+    border-radius: 0.8rem;
+    /* border-radius: 6rem;
+    width: 5rem;
+    height: 5rem; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    font-family: 'Roboto', sans-serif;
+    font-size: medium;
+    font-weight: 400;
+    color: #044A88;
+    text-align: center;
+}
+
+footer{
+    background-color: #044A88;
+    width: 100%;
+    height: 5vh;
+    color: white;
+    font-family: 'Itim', sans-serif;
+    font-size: 2vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.navbar #toggle, .navbar label{
+    display: none; 
+}
+
+
+@media (max-width: 1024px) {
+    .menu img{
+        height: 3.2rem;
+    }
+    #contadorPagina{
+        font-size: 20px;
+        align-self: center;
+    }
+    #contadorPaginaPaises{
+        font-size: 20px;
+        align-self: center;
+    }
+    .paginacionAtletas{
+        gap: 0.5rem;
+    }
+    .paginacionPaises{
+        gap: 0.5rem;
+    }
+}
+
+@media (max-width: 992px) {
+    .menu a {
+        font-size: 20px; 
+    }
+    .navSeccion{
+        font-size: 16px;
+    }
+    #contadorPagina{
+        font-size: 18px;
+        align-self: center;
+    }
+    #contadorPaginaPaises{
+        font-size: 18px;
+        align-self: center;
+    }
+    .textoEquidad{
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    main{
+        min-height: 90vh;
+    }
+    .navbar{
+        height: 5vh; 
+    }
+    .menu{
+        flex-direction: column;
+        position: absolute;
+        top: 5vh;
+        right: 0;
+        width: 100%;
+        display: none;
+        height: auto;
+        background-color: #2B993e;
+        gap: 10px;
+        padding-bottom: 20px;
+        justify-content: left;
+        align-items: left;
+        text-align: left; 
+    }
+    .navbar label {
+        display: inline-flex;
+        align-self: center;
+        color: white;
+        cursor: pointer; 
+    }
+    .navbar #toggle:checked ~ .menu  {
+        display: flex; 
+        height: auto; 
+    }
+    .rio {
+        display: none; 
+    }
+    .menu a {
+        font-size: 22px; 
+    }
+    .navSeccion{
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        font-size: medium;
+        row-gap: 20px;
+        padding: 1rem; 
+    }
+}
+
+@media (max-width: 425px) {
+    .footer{
+        font-size: 10px;
+    }
+    .modal{
+        height: 25rem;
+        width: 15rem;
+        gap: 18px;
+        font-size: large;
+        box-shadow: -0.5rem 0.5rem 0.5rem 0.5rem #044A88; /* offset-x | offset-y | blur-radius | spread-radius | color */
+    }
+    
+    .modal button{
+        height: 3rem;
+        width: 3rem;
+        margin-bottom: 0.5rem;
+        margin-left: 12rem;
+    }
+}
+
+/* ORIGINAL Y PRUEBA MENU TOGGLE
+.navbar{
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    background-color: #2B993e;  
+    height: 10vh;
+    padding: 0 20px;
+    width: 100%; }
+.menu{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    width: 90%; } */
+
+    /*.navbar{
+        background-color: #2B993e;
+        display: flex;
+        justify-content: space-evenly;
+        align-content: center;
+        flex-direction: column;
+        align-items: center;
+        padding: 10px 0px; }
+    .menu {
+        width: 100%;
+        height: 0;
+        overflow: hidden; }
+    .menu img{
+        display: none; }
+    .menu a {
+        font-size: 20px; 
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0;
+        flex-direction: column;
+        align-items: center;
+        padding: 0.5rem 0; }
+    .navbar label {
+        display: inline-flex;
+        align-self: center;
+        color: white;
+        cursor: pointer; }
+    .navbar #toggle:checked ~ .menu {
+        height: 100%; }*/
+
+/*Contenedor que tiene al botón*/
+/* .container {
+    display: flex; // Establece el contenedor como flex y alinea su contenido tanto horizontal como verticalmente 
+    justify-content: center; // Centra horizontalmente 
+    align-items: center; // Centra verticalmente 
+    min-height: 20vh; // Establece una altura mínima del 20% del viewport 
+    padding: 10px; // Agrega un poco de espacio interno para que no quede pegado al borde 
+} */
+
+/*boton para ingresar al sitio*/
+/* .button{
+    font-family: 'Itim', cursive;
+    font-size: 1.8rem;
+    height: 2.8rem;
+    border-width: 0.3rem;
+    border-radius: 0.70rem;
+    border-color: #2B9935;
+    background-color: /*#B39CD0*;
+} */
+
+/*Cambia el color del boton al hacer click*/
+/* .button:active{
+    background-color: #F2511C;
+} */
+
+/* #tipoFiltro{  
+    height: 30px;
+    border-radius: 0.4rem;
+    background-color: white;
+    font-family: 'Roboto', sans-serif;
+    font-size: medium;
+    font-weight: 400;
+    color: #044A88;
+}
+
+#tipoFiltro:hover{
+    background-color: #044A88;
+    color: white;
+    border-color: white;
+} */
+
+/*
+.medallaPlata{
+    padding-left: 50px; 
+}
+
+.medallaBronce{
+    padding-left: 40px; 
+}
+
+.medallaOro::before {
+    content: "";
+    position: absolute;
+    margin-left: -30px;
+    width: 20px;
+    height: 20px;
+    background-color: #fff133;
+    border-radius: 10px;
+}
+
+.medallaPlata::before {
+    content: "";
+    position: absolute;
+    margin-left: -30px;
+    width: 20px;
+    height: 20px;
+    background-color: #363634;
+    border-radius: 10px;
+}
+
+.medallaBronce::before {
+    content: "";
+    position: absolute;
+    margin-left: -30px;
+    width: 20px;
+    height: 20px;
+    background-color: #c35704;
+    border-radius: 10px;
+}*/
+
+/*.inputBuscar{
+    width: 300px;
+}*/
+
+/* .nombrePais{
+    font-family: 'Quattrocento Sans', sans-serif;
+    display: flex;
+    align-items: center;
+    font-weight: 700;
+}
+
+.medallas{
+    font-family: 'Roboto', sans-serif;
+    position: relative;
+    padding: 0 30px 0;
+    text-align: center;
+} */
